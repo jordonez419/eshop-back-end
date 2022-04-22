@@ -1,0 +1,40 @@
+{
+  "name": "anime-eshop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
+    "seed": "knex seed:run",
+    "migrateh": "heroku run knex migrate:latest -a anime-eshop",
+    "rollbackh": "heroku run knex migrate:rollback -a anime-eshop",
+    "databaseh": "heroku pg:psql -a nbasimulator",
+    "seedh": "heroku run knex seed:run -a nbasimulator",
+    "test": "cross-env NODE_ENV=testing jest --verbose --runInBand",
+    "deploy": "git push heroku main",
+    "heroku-post-build": "cd client && npm i && npm run build"
+  },
+  "engines": {
+    "node": "16.13.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "helmet": "4.6.0",
+    "knex": "^0.95.15",
+    "knex-cleaner": "^1.3.1",
+    "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "cross-env": "7.0.3",
+    "nodemon": "2.0.14",
+    "supertest": "6.1.6"
+  }
+}
