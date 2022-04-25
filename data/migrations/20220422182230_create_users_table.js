@@ -11,26 +11,31 @@ exports.up = function (knex) {
             tbl.decimal('price').notNullable()
             tbl.string('picture', 1000).notNullable()
         })
-        .createTable('users_items', tbl => {
+        .createTable('orders', tbl => {
+            tbl.increments('order_id')
+            tbl.string('date')
+        })
+        .createTable('items_orders', tbl => {
+            tbl.integer('order_id')
+                .unsigned()
+                .notNullable()
+                .references('order_id')
+                .inTable('orders')
+                .onDelete('CASCADE')
             tbl.integer('item_id')
                 .unsigned()
                 .notNullable()
                 .references('item_id')
                 .inTable('items')
                 .onDelete('CASCADE')
-            tbl.integer('user_id')
-                .unsigned()
-                .notNullable()
-                .references('user_id')
-                .inTable('users')
-                .onDelete('CASCADE')
-            tbl.increments('user_item_id')
+            tbl.increments('item_order_id')
         })
 };
 
 exports.down = function (knex) {
     return knex.schema
-        .dropTableIfExists('users_items')
+        .dropTableIfExists('items_orders')
         .dropTableIfExists('users')
         .dropTableIfExists('items')
+        .dropTableIfExists('orders')
 };

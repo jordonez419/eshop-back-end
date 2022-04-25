@@ -38,7 +38,7 @@ router.get('/:id', (req, res) => {
             res.status(400).json({ message: err.message })
         })
 })
-router.post('/addItem', (req, res) => {
+router.post('/additem', (req, res) => {
     console.log(req.body)
     // const newItem = req.body
     // // const { id } = req.params
