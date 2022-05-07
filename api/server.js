@@ -2,6 +2,7 @@ const express = require('express')
 const server = express()
 const itemsRouter = require('./items/items-router')
 const usersRouter = require('./users/users-router')
+const ordersRouter = require('./orders/orders-router')
 const cors = require("cors");
 
 const corsOptions = {
@@ -10,11 +11,11 @@ const corsOptions = {
     optionSuccessStatus: 200,
 }
 
-
-server.use(cors(corsOptions)) // Use this after the variable declaration
 server.use(express.json())
+server.use(cors(corsOptions)) // Use this after the variable declaration
 server.use('/api/users', usersRouter)
 server.use('/api/items', itemsRouter)
+server.use('/api/orders', ordersRouter)
 
 
 server.use((err, req, res, next) => { // eslint-disable-line

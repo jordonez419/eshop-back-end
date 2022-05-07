@@ -13,7 +13,12 @@ exports.up = function (knex) {
         })
         .createTable('orders', tbl => {
             tbl.increments('order_id')
-            tbl.string('date')
+            // tbl.string('date')
+            tbl.integer('user_id')
+                .unsigned()
+                .references('user_id')
+                .inTable('users')
+                .onDelete('CASCADE')
         })
         .createTable('items_orders', tbl => {
             tbl.integer('order_id')
@@ -35,7 +40,7 @@ exports.up = function (knex) {
 exports.down = function (knex) {
     return knex.schema
         .dropTableIfExists('items_orders')
+        .dropTableIfExists('orders')
         .dropTableIfExists('users')
         .dropTableIfExists('items')
-        .dropTableIfExists('orders')
 };
