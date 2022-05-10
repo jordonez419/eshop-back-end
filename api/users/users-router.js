@@ -14,18 +14,6 @@ router.get('/', (req, res) => {
         })
 })
 
-// router.get('/search/:term', (req, res) => {
-//     const { name } = req.params
-//     // console.log(typeof (name))
-//     // console.log(`getting player by term: ${name}`)
-//     Player.getByName(name)
-//         .then(response => {
-//             res.status(200).json(response)
-//         })
-//         .catch(err => {
-//             res.status(400).json({ message: err.message })
-//         })
-// })
 
 router.get('/:id', (req, res) => {
     console.log('getting user by id')
@@ -38,11 +26,12 @@ router.get('/:id', (req, res) => {
             res.status(400).json({ message: err.message })
         })
 })
-router.post('/additem', (req, res) => {
-    console.log(req.body)
-    // const newItem = req.body
-    // // const { id } = req.params
-    User.getById(id)
+router.post('/register', (req, res) => {
+    const user_name = req.body.user_name
+    const password = req.body.password
+    console.log(user_name)
+    console.log(password)
+    User.createUser(user_name, password)
         .then(response => {
             res.status(201).json(response)
         })

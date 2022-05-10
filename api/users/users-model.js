@@ -8,6 +8,10 @@ const getById = (id) => {
     return db('users as us').where('us.user_id', id).first()
 }
 
+const createUser = (user_name, password) => {
+    return db('users').insert({ user_name, password })
+}
+
 // build a post route that adds an item to an order, and then adds that order to the user
 // Gonna need some joins with the bridge table!
 
@@ -41,5 +45,6 @@ const getById = (id) => {
 
 module.exports = {
     getAll,
-    getById
+    getById,
+    createUser
 }
