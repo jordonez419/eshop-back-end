@@ -12,6 +12,10 @@ const createUser = (user_name, password) => {
     return db('users').insert({ user_name, password })
 }
 
+const findBy = (filter) => {
+    return db("users").where(filter).orderBy("user_id");
+}
+
 // build a post route that adds an item to an order, and then adds that order to the user
 // Gonna need some joins with the bridge table!
 
@@ -46,5 +50,6 @@ const createUser = (user_name, password) => {
 module.exports = {
     getAll,
     getById,
-    createUser
+    createUser,
+    findBy
 }
