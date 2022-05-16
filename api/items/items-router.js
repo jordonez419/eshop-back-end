@@ -2,8 +2,9 @@ const express = require('express');
 // const server = require('../server');
 const router = express.Router();
 const Item = require('./items-model')
+const { restricted, checkUsernameExists } = require('../middleware/auth-middleware')
 
-router.get('/', (req, res) => {
+router.get('/', restricted, (req, res) => {
     console.log('getting all items')
     Item.getAll()
         .then(response => {
@@ -27,7 +28,7 @@ router.get('/', (req, res) => {
 //         })
 // })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', restricted, (req, res) => {
     console.log('getting item by id')
     const { id } = req.params
     Item.getById(id)
